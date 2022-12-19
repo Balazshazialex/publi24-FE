@@ -1,0 +1,173 @@
+<div class="container-xl">
+    <div class="table-responsive">
+      <div class="table-wrapper">
+        <table class="table table-striped table-hover table-bordered table-content">
+          <thead>
+            <tr class="center-align">
+              <th>Id</th>
+              <th>Name</th>
+              <th>Exchange</th>
+              <th>Ticker</th>
+              <th>Isin</th>
+              <th>Website</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let company of companies" class="center-align">
+              <td>{{ company.id }}</td>
+              <td>{{ company.name }}</td>
+              <td>{{ company.exchange }}</td>
+              <td>{{ company.ticker }}</td>
+              <td>{{ company.isin }}</td>
+              <td>{{ company.website }}</td>
+            </tr>
+            <tr>
+              <td *ngIf="companies.length == 0" colspan="6">No companies Found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <input class="form-control" type="text" name="search" [(ngModel)]="searchTextId" autocomplete="off" placeholder="Start searching for a company by id">
+        </div>
+        <div class="col-3">        
+            <button class="btn btn-primary" (click)="searchById()"> Search</button>
+        </div>
+        <div class="col-6">
+            <p>{{highlightCompanyById}}</p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-6">
+            <input class="form-control" type="text" name="search" [(ngModel)]="searchTextIsin" autocomplete="off" placeholder="Start searching for a company by isin">
+        </div>
+        <div class="col-3">        
+            <button class="btn btn-primary" (click)="searchByIsin()"> Search</button>
+        </div>
+        <div class="col-6">
+            <p>{{highlightCompanyByIsin}}</p>
+        </div>
+    </div>
+    <br>
+
+    <form #employeeForm="ngForm">
+        <div class="table-content">
+          <div class="form-group row">
+            <div class="col-1">
+              <label for="Name">Name<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-5">
+              <input type="text" class="form-control" id="Name" required maxlength="255"
+                [(ngModel)]="addCompanyForm.Name" name="Name" #Name="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1">
+              <label for="Exchange">Exchange<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-5">
+              <input type="text" class="form-control" id="Exchange" required maxlength="255"
+                [(ngModel)]="addCompanyForm.Exchange" name="Exchange" #Name="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1">
+              <label for="Ticker">Ticker<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-5">
+              <input type="text" class="form-control" id="Ticker" required maxlength="255"
+                [(ngModel)]="addCompanyForm.Ticker" name="Ticker" #Name="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1">
+              <label for="Isin">Isin<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-5">
+              <input type="text" class="form-control" id="Isin" required maxlength="255"
+                [(ngModel)]="addCompanyForm.Isin" name="Isin" #Name="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1">
+              <label for="Website">Website</label>
+            </div>
+            <div class="col-5">
+              <input type="text" class="form-control" id="Website" required maxlength="255"
+                [(ngModel)]="addCompanyForm.Website" name="Website" #Name="ngModel">
+            </div>
+          </div>
+        </div>
+        <div class="table-footer">
+          <button class="btn btn-success" (click)="AddCompany()">Add</button>
+        </div>
+      </form>
+    
+      
+      <form #employeeForm="ngForm">
+        <div class="table-content">
+            <div class="form-group row">
+                <div class="col-1">
+                  <label for="Id">Id<span class="requiredStar">*</span></label>
+                </div>
+                <div class="col-5">
+                  <input type="text" class="form-control" id="Id" required maxlength="255"
+                    [(ngModel)]="updateCompanyForm.Id" name="Id" #Name="ngModel">
+                </div>
+              </div>
+          <div class="form-group row">
+            <div class="col-1">
+              <label for="Name">Name<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-5">
+              <input type="text" class="form-control" id="Name" required maxlength="255"
+                [(ngModel)]="updateCompanyForm.Name" name="Name" #Name="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1">
+              <label for="Exchange">Exchange<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-5">
+              <input type="text" class="form-control" id="Exchange" required maxlength="255"
+                [(ngModel)]="updateCompanyForm.Exchange" name="Exchange" #Name="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1">
+              <label for="Ticker">Ticker<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-5">
+              <input type="text" class="form-control" id="Ticker" required maxlength="255"
+                [(ngModel)]="updateCompanyForm.Ticker" name="Ticker" #Name="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1">
+              <label for="Isin">Isin<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-5">
+              <input type="text" class="form-control" id="Isin" required maxlength="255"
+                [(ngModel)]="updateCompanyForm.Isin" name="Isin" #Name="ngModel">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1">
+              <label for="Website">Website</label>
+            </div>
+            <div class="col-5">
+              <input type="text" class="form-control" id="Website" required maxlength="255"
+                [(ngModel)]="updateCompanyForm.Website" name="Website" #Name="ngModel">
+            </div>
+          </div>
+        </div>
+        <div class="table-footer">
+          <button class="btn btn-success" (click)="UpdateCompany()">Update</button>
+        </div>
+      </form>
+  </div>
+
+  
